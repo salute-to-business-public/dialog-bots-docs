@@ -1,1 +1,0 @@
-# Handling files and images
