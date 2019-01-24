@@ -1,6 +1,6 @@
 # Installation
 
-## Python installation
+## Python
 
 Firstly, you should download package from GitHub:
 
@@ -23,12 +23,26 @@ That's it! Then you can launch test examples with this:
 ```bash
 $ python main.py
 ```
+### Anaconda
 
-## Java installation
+Anaconda installation is the same as for Python, but you need to ensure that you have
+the latest versions of ``pip`` and ``setuptools``. If not, you have to upgrade them:
+* run command ``conda config --set ssl_verify no`` to disable SSL checking
+(case of restricted domain networks where your SSL certificates
+might be changed by corporate brandmauer);
+* then open Anaconda Navigator and install ``setuptools``;
+* open Anaconda prompt and input ``easy_install pip``.
+
+After this you can install packages in the usual way.
+
+You can also read [this](http://seanlaw.github.io/2015/12/23/fetching-conda-packages-behind-a-firewall/)
+about installing packages in Anaconda without SSL.
+
+## Java
 
 Java Bot SDK is available as ``jar``-dependency via Maven.
 
-## JavaScript installation
+## JavaScript
 
 Firstly, you should download package from GitHub:
 
