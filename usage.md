@@ -58,6 +58,18 @@ if __name__ == '__main__':
 
 ```
 
+If you need to connect to server which is protected by SSL, you should use ``get_secure_bot``
+with default SSL credentials (imported from ``grpc`` module) like this:
+
+```python
+bot = DialogBot.get_secure_bot(
+    'grpc-test.transmit.im:8080',  # bot endpoint
+    grpc.ssl_channel_credentials(), # empty by default
+    'cbb4994cabfa8d2a5bce0b5f7a44c23da943f767'  # bot token
+)
+
+```
+
 #### ** Java **
 
 ```java

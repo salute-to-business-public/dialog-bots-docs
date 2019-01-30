@@ -148,8 +148,11 @@ It's possible to send different controls (buttons, comboboxes) directly to the c
 
 #### ** Python **
 
+For Python SDK, it's needed to add extra callback for handling actions:
+
 ```python
 from dialog_bot_sdk import interactive_media
+
 
 def on_msg(*params):
     print('on msg', params)
@@ -169,6 +172,12 @@ def on_msg(*params):
             ]
         )]
     )
+
+def on_click(*params):
+    print('on click', params)
+
+
+bot.messaging.on_message(on_msg, on_click)
 
 ```
 
