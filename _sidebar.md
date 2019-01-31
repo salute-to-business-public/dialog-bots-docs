@@ -6,6 +6,7 @@
 - Features
 
   - [Messaging](messaging.md)
+  - [Users](users.md)
 
 - Links
   - [External links](externallinks.md)

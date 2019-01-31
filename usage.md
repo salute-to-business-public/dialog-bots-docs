@@ -158,3 +158,9 @@ bot
 Result of echobot's work:
 
 ?> ![](bots_ping_pong_example.png)
+
+## Shutdown the bot
+
+To shutdown the bot written on Java or JavaScript you just need to press ``Ctrl+C`` on any platform.
+To stop Python-written bots, you need to press ``Ctrl+C`` on Mac/Linux machines
+or ``Ctrl+Break`` (``Ctrl+fn+B`` for laptops without Break key) for Windows ones.

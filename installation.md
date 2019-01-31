@@ -8,7 +8,14 @@ Firstly, you should download package from GitHub:
 $ git clone https://github.com/dialogs/python-bot-sdk.git
 ```
 
-Next step is to install python packages (run this command from `python-bot-sdk` folder):
+Before installation of libraries, you need to check that you have the latest versions of ``pip`` and ``setuptools``:
+
+```bash
+pip install --upgrade pip
+pip install --upgrade setuptools
+```
+
+Next step is to install necessary packages (run this command from `python-bot-sdk` folder):
 
 ```bash
 $ pip install -r requirements.txt
@@ -25,7 +32,7 @@ $ python main.py
 ```
 ### Anaconda
 
-Anaconda installation is the same as for Python, but you need to ensure that you have
+Anaconda installation is the same as for Python, but you also need to ensure that you have
 the latest versions of ``pip`` and ``setuptools``. If not, you have to upgrade them:
 * run command ``conda config --set ssl_verify no`` to disable SSL checking
 (case of restricted domain networks where your SSL certificates
