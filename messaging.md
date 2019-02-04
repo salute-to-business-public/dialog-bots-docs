@@ -107,7 +107,7 @@ Result:
 
 ## Sending images with preview
 
-You also can send images to chat with auto-generatied preview (not like files):
+You also can send images to chat with auto-generated preview (not like files):
 
 <!-- tabs:start -->
 

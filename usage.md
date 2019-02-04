@@ -2,28 +2,27 @@
 
 ## Test endpoint
 
-For test purposes you can use our test environment with a credentials above:
+You can use our test environment for development purposes:
 
 ||
 | -------------------------------------- | -----------------------------------|
-| **Web URL**                            | https://grps-test.transmit.im      |
-| **Endpoint for browser/desktop app**   | https://grps-test.transmit.im:8443 |
-| **Endpoint for bot (insecure)**        | grps-test.transmit.im:8080         |
-| **Login**                              | testuser                           |
-| **Password**                           | testpassword                       |
+| **Web URL**                            | https://grpс-test.transmit.im      |
+| **Endpoint for browser/desktop app**   | https://grpс-test.transmit.im:8443 |
+| **Endpoint for bot**                   | grpс-test.transmit.im:9443         |
+| **Login**                              | alice                              |
+| **Password**                           | password                           |
 
 ?> ![](bots_login_screen.png)
 
-Web URL is needed to access messenger via browser. Endpoints for browser or desktop app and
-for bot used for connect to Dialog GUI and Dialog API correspondingly. Insecure means establishing
-connection to test endpoint without SSL.  
+Web URL is for accessing messenger through browser. Endpoints for browser or desktop app and
+for bot used for connect to Dialog GUI and Dialog API correspondingly.
 
 ## Obtaining a token
 
-Dialog bots use token-based authorization. For obtaining a token,
-you have to go to Dialog URL (for example ``https://grps-test.transmit.im``),
-type ``Security Bot`` in search bar of your Dialog and start conversation with them.
-To create new bot just send him this command:
+Dialog bots use token-based authorization. To obtain a token, go to Dialog URL
+(for example ``https://grps-test.transmit.im``),
+and find Security Bot (@security) - type Security Bot in search bar to find it.
+To create a new bot, start conversation with Security Bot and send:
 ```
 /bot new <bot_nickname> <bot_name>
 ```
