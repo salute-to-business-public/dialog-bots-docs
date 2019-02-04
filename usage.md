@@ -38,6 +38,7 @@ Endpoint address and token are all you need to set up your bot. So the full exam
 
 ```python
 from dialog_bot_sdk.bot import DialogBot
+import grpc
 
 
 def on_msg(*params):
@@ -48,24 +49,13 @@ def on_msg(*params):
 
 
 if __name__ == '__main__':
-    bot = DialogBot.get_insecure_bot(
-        'grpc-test.transmit.im:8080',  # bot endpoint
+    bot = DialogBot.get_secure_bot(
+        'grpc-test.transmit.im:9443',  # bot endpoint
+        grpc.ssl_channel_credentials(), # SSL credentials (empty by default!)
         'cbb4994cabfa8d2a5bce0b5f7a44c23da943f767'  # bot token
     )
 
     bot.messaging.on_message(on_msg)
-
-```
-
-If you need to connect to server which is protected by SSL, you should use ``get_secure_bot``
-with default SSL credentials (imported from ``grpc`` module) like this:
-
-```python
-bot = DialogBot.get_secure_bot(
-    'grpc-test.transmit.im:8080',  # bot endpoint
-    grpc.ssl_channel_credentials(), # empty by default
-    'cbb4994cabfa8d2a5bce0b5f7a44c23da943f767'  # bot token
-)
 
 ```
 
@@ -82,7 +72,7 @@ public class Main {
 
         BotConfig botConfig = BotConfig.Builder.aBotConfig()
                 .withHost("grpc-test.transmit.im")
-                .withPort(8080)
+                .withPort(9443)
                 .withToken("e60137c00345e62ea8a21506cfe31b2be10852ec").build();
 
         bot.messaging().onMessage(message ->
@@ -117,7 +107,7 @@ if (typeof token !== 'string') {
 
 const bot = new Bot({
   token,
-  endpoints: ['https://grpc-test.transmit.im:8443']
+  endpoints: ['https://grpc-test.transmit.im:9443']
 });
 
 bot.updateSubject.subscribe({
