@@ -2,34 +2,28 @@
 
 ## Python
 
-1. Clone package from GitHub:
-
-```bash
-$ git clone https://github.com/dialogs/python-bot-sdk.git
-```
+1. Check your Python version: you should have 3.5 version or later. If you don't, please [install](https://www.python.org/downloads/) the upgrade.
 
 2. Check that you have the latest versions of ``pip`` and ``setuptools``:
 
 ```bash
-pip install --upgrade pip
-pip install --upgrade setuptools
+$ pip install --upgrade pip
+$ pip install --upgrade setuptools
 ```
-
-3. Install required packages (run this command from `python-bot-sdk` folder):
+3. Install package by this command:
 
 ```bash
-$ pip install -r requirements.txt
+$ pip install dialog_bot_sdk
 ```
+
+And that's it!
 
 !>If you need to install SDK into restricted domain network where your SSL certificates might be changed by corporate firewall,
-    you can use ``--trusted-host`` directive like this:  
-    ``$ pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt``
+    you should follow these steps:<br>
+   $ git clone https://github.com/dialogs/python-bot-sdk.git<br>
+   $ pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
 
 
-That's it! Launch examples with this:
-```bash
-$ python main.py
-```
 ### Anaconda
 
 Anaconda installation is the same as for Python, however you also need to ensure that you have
@@ -47,7 +41,25 @@ SSL [here](http://seanlaw.github.io/2015/12/23/fetching-conda-packages-behind-a-
 
 ## Java
 
-Java Bot SDK is available as ``jar``-dependency via Maven.
+Java Bot SDK is available as ``jar``-dependency via Maven. How to use the SDK with maven/gradle?
+
+1. Add repository
+
+Gradle:
+```
+repositories {
+    maven { url "http://dialog.bintray.com/maven" }
+}
+```
+
+2. Add BOT dependency
+
+```
+dependencies {
+    compile 'im.dlg:bot-sdk:1.2'
+}
+```
+
 
 ## JavaScript
 

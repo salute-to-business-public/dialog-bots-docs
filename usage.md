@@ -6,9 +6,9 @@ You can use our test environment for development purposes:
 
 ||
 | -------------------------------------- | -----------------------------------|
-| **Web URL**                            | https://grpс-test.transmit.im      |
-| **Endpoint for browser/desktop app**   | https://grpс-test.transmit.im:8443 |
-| **Endpoint for bot**                   | grpс-test.transmit.im:9443         |
+| **Web URL**                            | https://grpc-test.transmit.im      |
+| **Endpoint for browser/desktop app**   | https://grpc-test.transmit.im:8443 |
+| **Endpoint for bot**                   | grpc-test.transmit.im:9443         |
 | **Login**                              | alice                              |
 | **Password**                           | password                           |
 

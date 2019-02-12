@@ -16,6 +16,15 @@ bot = DialogBot.get_insecure_bot(
 bot.messaging.on_message(on_msg) # subscribing on incoming messages with callback
 ```
 
+``on_msg`` is a callback that accepts the ``params`` tuple with message updates. Fields of ``params`` object are:
+
+* **peer** - Peer object of message sender
+* **sender_uid** - sender's id
+* **date** - message timestamp
+* **message** - MessageContent object
+* **mid** - message id
+
+
 #### ** Java **
 
 ```java
@@ -180,6 +189,15 @@ def on_click(*params):
 bot.messaging.on_message(on_msg, on_click)
 
 ```
+
+``on_click`` is a callback that accepts the ``params`` tuple with interactive media updates. Fields of ``params`` object are:
+
+* **uid** - id of user who performed interaction
+* **value** - element value
+* **id** - element local id (within message)
+* **mid** - message id where interaction was performed
+
+
 
 #### ** Java **
 
