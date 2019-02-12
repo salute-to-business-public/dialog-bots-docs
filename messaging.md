@@ -24,6 +24,13 @@ bot.messaging.on_message(on_msg) # subscribing on incoming messages with callbac
 * **message** - MessageContent object
 * **mid** - message id
 
+For example:
+
+```python
+def on_msg(*params):
+    text = params[0].message.textMessage.text
+    print(text)
+```
 
 #### ** Java **
 
@@ -197,7 +204,14 @@ bot.messaging.on_message(on_msg, on_click)
 * **id** - element local id (within message)
 * **mid** - message id where interaction was performed
 
+For example:
 
+```python
+def on_click(*params):
+    uid = params[0].uid
+    which_button = params[0].value
+    print(uid, 'clicked on', which_button)
+```
 
 #### ** Java **
 
