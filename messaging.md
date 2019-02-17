@@ -123,7 +123,7 @@ Result:
 
 ## Sending images with preview
 
-You also can send images to chat with auto-generated preview (not like files):
+You can also send images to chat with auto-generated preview (not like files):
 
 <!-- tabs:start -->
 
@@ -257,3 +257,31 @@ bot
 Result:
 
 ?> ![](bots_simple_buttons.png)
+
+## Message history
+
+In Python SDK there's a feature of loading history of messages from conversations with particular peers:
+
+<!-- tabs:start -->
+
+#### ** Python **
+
+
+```python
+def on_msg(*params):
+    history = bot.messaging.load_message_history(
+        outpeer=bot.manager.get_outpeer(params[0].peer),
+        limit=100
+    )
+
+    print(history)
+```
+
+This function has several params:
+
+* **outpeer** - outpeer of user which history of messages we want to load
+* **limit** - number of messages
+* **date** - from which date we load history (in unix timestamp format)
+* **direction** - direction of history (can be ``messaging_pb2.LISTLOADMODE_FORWARD`` or ``messaging_pb2.LISTLOADMODE_BACKWARD``)
+
+<!-- tabs:end -->
