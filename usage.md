@@ -50,13 +50,20 @@ def on_msg(*params):
 
 if __name__ == '__main__':
     bot = DialogBot.get_secure_bot(
-        'grpc-test.transmit.im:9443',  # bot endpoint
+        'grpc-test.transmit.im:9443',  # bot endpoint (specify different endpoint if you want to connect to your on-premise environment)
         grpc.ssl_channel_credentials(), # SSL credentials (empty by default!)
-        'cbb4994cabfa8d2a5bce0b5f7a44c23da943f767'  # bot token
+        'cbb4994cabfa8d2a5bce0b5f7a44c23da943f767',  # bot token
+        verbose=False # optional parameter, when it's True bot prints info about the called methods, False by default
     )
 
     bot.messaging.on_message(on_msg)
 
+```
+
+You can check bot's user info via `user_info` field. For example, if you need to access the nickname of the bot, you can do it this way:
+
+```python
+print(bot.user_info.user.nickname)
 ```
 
 #### ** Java **

@@ -2,7 +2,7 @@
 
 ## Subscribing on updates
 
-In all of SDK's there is only way to receive messages (and any other updates): subscribing on messages via ``onMessage`` method:
+In all of SDK's there is only way to receive messages (and any other updates): subscription on messages via ``onMessage`` method:
 
 <!-- tabs:start -->
 
@@ -13,7 +13,7 @@ bot = DialogBot.get_insecure_bot(
     ...
 )
 
-bot.messaging.on_message(on_msg) # subscribing on incoming messages with callback
+bot.messaging.on_message(on_msg) # subscription on incoming messages with callback
 ```
 
 ``on_msg`` is a callback that accepts the ``params`` tuple with message updates. Fields of ``params`` object are:
@@ -31,6 +31,23 @@ def on_msg(*params):
     text = params[0].message.textMessage.text
     print(text)
 ```
+
+Notice that `on_message` method is blocking. It means that bot will listen to messages, call callback in case of message and won't do anything else. Since version `1.2.0` of Python Bot SDK there is also
+`on_message_async` method that performs subscription to updates in a separate thread. Let's see:
+
+```python
+bot.messaging.on_message(on_msg) # blocking version of subscription
+
+print('Hey, I am here!') # this code is unreachable
+```
+
+```python
+bot.messaging.on_message_async(on_msg) # non-blocking subscription
+
+print('Hey, I am here!') # will be printed
+
+```
+
 
 #### ** Java **
 
