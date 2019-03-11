@@ -9,7 +9,7 @@ You can use our test environment for development purposes:
 | **Web URL**                            | https://grpc-test.transmit.im      |
 | **Endpoint for browser/desktop app**   | https://grpc-test.transmit.im:8443 |
 | **Endpoint for bot**                   | grpc-test.transmit.im:9443         |
-| **Login**                              | alice                              |
+| **Login**                              | alice / bobby                      |
 | **Password**                           | password                           |
 
 ?> ![](bots_login_screen.png)
@@ -28,6 +28,35 @@ To create a new bot, start conversation with Security Bot and send:
 ```
 ?> Notice that `nickname` is unique system name while `name` is displayed in dialog
 list and can be non-unique.
+
+## Using a PFX certificate
+
+Some corporate servers enable SSL authorization. The most common way to authorize users there is using PFX certificates.
+Python and Java Bot SDK support PFX certificates to authorize its bots. For example:
+
+<!-- tabs:start -->
+
+#### ** Python **
+
+```python
+bot = DialogBot.get_secure_bot_with_pfx_certificate(
+        os.environ.get('BOT_ENDPOINT'),  # bot endpoint
+        'cert.pfx',  # path to cert file
+        'password'  # password from cert
+    )
+```
+#### ** Java **
+
+```java
+BotConfig botConfig = BotConfig.Builder.aBotConfig()
+                .withHost("eem.dlg.im")
+                .withCertPath("cert.pfx")
+                .withCertPassword("password").build();
+
+Bot bot = Bot.start(botConfig).get();
+```
+
+<!-- tabs:end -->
 
 ## Simple echobot example
 Endpoint address and token are all you need to set up your bot. So the full example of simple echobot looks like this:
