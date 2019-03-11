@@ -45,6 +45,7 @@ bot = DialogBot.get_secure_bot_with_pfx_certificate(
         'password'  # password from cert
     )
 ```
+
 #### ** Java **
 
 ```java

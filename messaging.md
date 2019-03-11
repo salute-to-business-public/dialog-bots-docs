@@ -253,18 +253,18 @@ bot
         message.content.text,
         MessageAttachment.reply(message.id),
         ActionGroup.create({
-          actions: [
-            Action.create({
-              id: 'test',
-              widget: Button.create({ label: 'button_one' })
-          }),
-          Action.create({
-            id: 'test',
-            widget: Button.create({ label: 'button_two' })
-          })
-          ]
+            actions: [
+                Action.create({
+                    id: 'test',
+                    widget: Button.create({ label: 'button_one' })
+                }),
+                Action.create({
+                    id: 'test',
+                    widget: Button.create({ label: 'button_two' })
+                })
+            ]
         })
-      );
+    );
   }
 )
 ```
@@ -274,6 +274,70 @@ bot
 Result:
 
 ?> ![](bots_simple_buttons.png)
+
+To call confirmation alert before action:
+
+<!-- tabs:start -->
+
+#### ** Python **
+
+```python
+confirm = InteractiveMediaConfirm("Are you sure?", "Confirm", "ok", "dismiss")
+
+button = interactive_media.InteractiveMediaButton("Button", "button")
+
+bot.messaging.send_message(
+    params[0].peer,
+    'button',
+    [
+        InteractiveMediaGroup(
+            [
+                InteractiveMedia(1, button, 'default', confirm)
+            ]
+        )
+    ]
+
+)
+```
+
+#### ** Java **
+
+```java
+List<InteractiveAction> actions = new ArrayList<>();
+actions.add(
+        new InteractiveAction(
+                "button_one",
+                new InteractiveButton("button_one", "button_one"),
+                new InteractiveConfirm("Are you sure?", "Confirm", "ok", "dismiss"))
+        );
+
+InteractiveGroup group = new InteractiveGroup(actions);
+
+```
+
+#### ** JavaScript **
+
+```javascript
+bot
+  .onMessage(async (message) => {
+    await bot.sendText(
+        message.peer,
+        message.content.text,
+        MessageAttachment.reply(message.id),
+        ActionGroup.create({
+            actions: [
+                Action.create({
+                    id: 'test',
+                    widget: Button.create({ label: 'button_one' }),
+                    confirm: ActionConfirm.create({ title: 'Confirm', text: 'Are you sure?', ok: 'ok', dismiss: 'dismiss' })
+                }),
+            ]
+        })
+    );
+  }
+)
+```
+<!-- tabs:end -->
 
 ## Message history
 
