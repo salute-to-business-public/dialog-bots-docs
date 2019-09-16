@@ -20,7 +20,7 @@ for bot used for connect to Dialog GUI and Dialog API correspondingly.
 ## Obtaining a token
 
 Dialog bots use token-based authorization. To obtain a token, go to Dialog URL
-(for example ``https://grps-test.transmit.im``),
+(for example ``https://grpс-test.transmit.im``),
 and find Security Bot (@security) - type Security Bot in search bar to find it.
 To create a new bot, start conversation with Security Bot and send:
 ```
