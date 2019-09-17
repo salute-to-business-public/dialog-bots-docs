@@ -53,7 +53,7 @@ List<User> users = bot.users().searchUserByNick("admin").get(); // returns list 
 
 ```java
 # now we can write to person first
-if (users.size() > 0) {
+if (!users.isEmpty()) {
     bot.messaging().sendText(
             users.get(0).getPeer(),
             "I found you anyway!"
