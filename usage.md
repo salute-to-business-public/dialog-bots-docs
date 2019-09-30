@@ -4,13 +4,9 @@
 
 You can use our test environment for development purposes:
 
-||
+|                                        |                                    |
 | -------------------------------------- | -----------------------------------|
-| **Web URL**                            | https://grpc-test.transmit.im      |
-| **Endpoint for browser/desktop app**   | https://grpc-test.transmit.im:8443 |
-| **Endpoint for bot**                   | grpc-test.transmit.im:9443         |
-| **Login**                              | alice / bobby                      |
-| **Password**                           | password                           |
+| **Web URL**                            | https://hackathon.transmit.im      |
 
 ?> ![](bots_login_screen.png)
 
