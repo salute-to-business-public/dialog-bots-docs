@@ -16,7 +16,7 @@ for bot used for connect to Dialog GUI and Dialog API correspondingly.
 ## Obtaining a token
 
 Dialog bots use token-based authorization. To obtain a token, go to Dialog URL
-(for example ``https://grpс-test.transmit.im``),
+(for example ``https://hackathon.transmit.im``),
 and find Security Bot (@security) - type Security Bot in search bar to find it.
 To create a new bot, start conversation with Security Bot and send:
 ```
@@ -46,9 +46,11 @@ bot = DialogBot.get_secure_bot_with_pfx_certificate(
 
 ```java
 BotConfig botConfig = BotConfig.Builder.aBotConfig()
-                .withHost("eem.dlg.im")
-                .withCertPath("cert.pfx")
-                .withCertPassword("password").build();
+                .withHost("hackathon-mob.transmit.im")
+                .withPort(443)
+                .withCertPath("cert file")
+                .withCertPassword("cert password")
+                .build();
 
 Bot bot = Bot.start(botConfig).get();
 ```
@@ -76,9 +78,9 @@ def on_msg(*params):
 
 if __name__ == '__main__':
     bot = DialogBot.get_secure_bot(
-        'grpc-test.transmit.im:9443',  # bot endpoint (specify different endpoint if you want to connect to your on-premise environment)
+        'hackathon-mob.transmit.im',  # bot endpoint (specify different endpoint if you want to connect to your on-premise environment)
         grpc.ssl_channel_credentials(), # SSL credentials (empty by default!)
-        'cbb4994cabfa8d2a5bce0b5f7a44c23da943f767',  # bot token
+        'PUT YOUR BOT TOKEN HERE',  # bot token
         verbose=False # optional parameter, when it's True bot prints info about the called methods, False by default
     )
 
@@ -104,9 +106,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
 
         BotConfig botConfig = BotConfig.Builder.aBotConfig()
-                .withHost("grpc-test.transmit.im")
-                .withPort(9443)
-                .withToken("e60137c00345e62ea8a21506cfe31b2be10852ec").build();
+                .withHost("hackathon-mob.transmit.im")
+                .withPort(443)
+                .withToken("PUT YOUR BOT TOKEN HERE").build();
 
         bot.messaging().onMessage(message ->
                 bot.users().get(message.getSender()).thenAccept(userOpt -> userOpt.ifPresent(user -> {
@@ -140,7 +142,7 @@ if (typeof token !== 'string') {
 
 const bot = new Bot({
   token,
-  endpoints: ['https://grpc-test.transmit.im:9443']
+  endpoints: ['https://hackathon-mob.transmit.im:443']
 });
 
 bot.updateSubject.subscribe({
