@@ -403,6 +403,49 @@ bot
 ```
 <!-- tabs:end -->
 
+Dropdown menu:
+
+<!-- tabs:start -->
+
+#### ** Python **
+
+```python
+        message = bot.messaging.send_message(
+            params[0].peer, 'Choose one:',
+            [interactive_media.InteractiveMediaGroup(
+                [interactive_media.InteractiveMedia(
+                    'id_1',
+                    interactive_media.InteractiveMediaSelect({
+                        'first_val': 'first?',  # value: label
+                        'second_val': 'second?',
+                    })
+                )]
+            )]
+        )
+```
+
+#### ** Java **
+
+```java
+List<InteractiveSelectOption> selectOptions = new ArrayList<>();
+selectOptions.add(new InteractiveSelectOption("Tom & Cross", "Tom & Cross"));
+                              selectOptions.add(new InteractiveSelectOption("Pinky gram", "Pinky gram"));
+selectOptions.add(new InteractiveSelectOption("Rody Mo", "Rody Mo"));
+
+ArrayList<InteractiveAction> actions = new ArrayList<>();
+InteractiveSelect interactiveSelect = new InteractiveSelect("Who want's to play?", "Choose one...", selectOptions);
+actions.add(new InteractiveAction("action_1", interactiveSelect));
+                              InteractiveGroup interactiveGroup = new InteractiveGroup("Quiz", "Do you want to answer a quiz?", actions);
+bot.interactiveApi().send(message.getPeer(), interactiveGroup);
+```
+
+#### ** JavaScript **
+
+```javascript
+TBD
+```
+<!-- tabs:end -->
+
 ## Send media
 
 Except the images can be to send audio and webpage content
