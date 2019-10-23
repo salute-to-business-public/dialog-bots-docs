@@ -22,6 +22,13 @@ To create a new bot, start conversation with Security Bot and send:
 ```
 /bot new <bot_nickname> <bot_name>
 ```
+```
+Use the following format to create bots for hackathon: 
+
+Track name_task name_your team name 
+HR_vacation_bestteam
+```
+
 ?> Notice that `nickname` is unique system name while `name` is displayed in dialog
 list and can be non-unique.
 
