@@ -32,6 +32,50 @@ bot.messaging.send_message(
 )
 ```
 
+#### ** Python (SDK version 3.0.0 +) **
+
+Class User have attributes:
+
+- **peer** - main parameter for working with messages and groups
+- **data** - class UserData witch have parameters **name**, **avatar**, **about**, **nick**
+
+Class FullUser have attributes:
+
+- **id** - user id
+- **about** - about the user info
+- **preferred_languages** - list of user's languages
+- **time_zone** - user's timezone
+- **custom_profile** - user's custom profile
+
+There are several methods in Python SDK to access the user data (available in ``bot.users`` subclass):
+
+- **get_user_by_nick** - returns ``AsyncTask`` object with ``User`` object of user, which is used to message him (first parameter in ``send_message`` method). If a user didn't write to bot earlier, it's only way to write him first;
+- **get_user_by_id** - returns ``AsyncTask`` object with ``User`` object of user. Find user from dialogs, if user wrote earlier.
+- **get_full_profile_by_nick** - returns ``AsyncTask`` object with ``FullUser`` object by nickname;
+- **get_full_profile_by_id** - returns ``AsyncTask`` object with ``FullUser`` object by id;
+- **search_users_by_nick_substring** - find users list by substring of nickname (not complete coincidence!), returns ``AsyncTask`` with list of ``User``'s objects.
+
+Examples:
+
+```python
+bot.users.get_user_by_nick('admin')         # returns AsyncTask object
+
+```
+```python
+bot.users.get_user_by_nick('admin').wait()  # returns User object (blocked main thread)
+
+```
+
+```python
+user = bot.users.get_user_by_nick('admin')
+
+# now we can write to person first
+bot.messaging.send_message(
+    user,
+    'I found you anyway!'
+)
+```
+
 #### ** Java **
 
 There are several methods in Java SDK to access the user data (available in ``bot.users()`` subclass):
