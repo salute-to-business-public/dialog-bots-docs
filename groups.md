@@ -45,7 +45,7 @@ There are several methods in Python SDK to access the group data (available in `
 - **join_group** - Join to group by group token or invite url. Single parameter is ``token`` or ``invite_url`` (string). Return AsyncTask with Group.
 - **join_group_by_peer** - Join to group by group Peer (only for public groups). Single parameter is ``group_peer``.
 
-``group_peer`` - Peer or AsyncTask with Group.AsyncTask
+``group_peer`` - Peer or AsyncTask with Group
 ``user_peer`` - Peer or AsyncTask with User
 
 **load_members** - **join_group_by_peer** may be used if bot have permissions to do this.
