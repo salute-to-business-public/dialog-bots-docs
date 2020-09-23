@@ -48,6 +48,56 @@ print('Hey, I am here!') # will be printed
 
 ```
 
+#### ** Python (SDK version 3.0.0 +) **
+
+In all of SDK's there is only way to receive messages (and any other updates): subscription on messages via ``onMessage`` method:
+
+<!-- tabs:start -->
+
+#### ** Python **
+
+```python
+bot = DialogBot.get_insecure_bot(
+    ...
+)
+
+bot.messaging.on_message(on_msg) # subscription on incoming messages with callback
+```
+
+``on_msg`` is a callback that accepts the ``params`` message updates. Fields of ``params`` object are:
+
+* **peer** - chat Peer (group or user)
+* **sender_peer** - sender's Peer
+* **date** - message timestamp
+* **message** - MessageContent object
+* **mid** - message id
+* **forward** - forward messages id
+* **reply** - reply messages id
+* **previous_mid** - previous message id
+
+For example:
+
+```python
+def on_msg(params):
+    text = params.message.textMessage.text
+    print(text)
+```
+
+Notice that `on_message` method is blocking. It means that bot will listen to messages, call callback in case of message and won't do anything else. Since version `1.2.0` of Python Bot SDK there is also
+`on_message_async` method that performs subscription to updates in a separate thread. Let's see:
+
+```python
+bot.messaging.on_message(on_msg) # blocking version of subscription
+
+print('Hey, I am here!') # this code is unreachable
+```
+
+```python
+bot.messaging.on_message_async(on_msg) # non-blocking subscription
+
+print('Hey, I am here!') # will be printed
+
+```
 
 #### ** Java **
 
@@ -89,6 +139,13 @@ There are high-level functions for sending messages:
 bot.messaging.send_message(peer, message)
 ```
 
+#### ** Python (SDK version 3.0.0 +) **
+
+```python
+bot.messaging.send_message(peer, message)
+# peer must be Peer or AsyncTask object (if used AsyncTask it must contain Group or User. For example, from method **get_user_by_nick** )
+```
+
 #### ** Java **
 
 ```java
@@ -112,7 +169,18 @@ There are high-level functions for updating messages:
 #### ** Python **
 
 ```python
-bot.messaging.update_message(message_id, text)
+messages = bot.messaging.get_messages_by_id([mid])
+bot.messaging.update_message(message[0], text)
+# Message can be obtained from method get_messages_by_id
+```
+
+#### ** Python (SDK version 3.0.0 +) **
+
+```python
+messages = bot.messaging.get_messages_by_id([mid])
+# returns AsyncTask with list of messages
+bot.messaging.update_message(message, text)
+# message must be Message or AsyncTask object. If used AsyncTask the first element of the array is taken
 ```
 
 #### ** Java **
@@ -132,7 +200,15 @@ There are high-level functions for deleting messages:
 #### ** Python **
 
 ```python
-bot.messaging.delete(mids) # mids - array of message ids
+bot.messaging.delete(message)
+# Message can be obtained from method get_messages_by_id
+```
+
+#### ** Python (SDK version 3.0.0 +) **
+
+```python
+bot.messaging.delete(message)
+# Message (AsyncTask) can be obtained from method get_messages_by_id
 ```
 
 #### ** Java **
@@ -153,6 +229,13 @@ There are high-level functions for replying messages:
 
 ```python
 bot.messaging.reply(peer, mids, text) # text may by None
+```
+
+#### ** Python (SDK version 3.0.0 +) **
+
+```python
+bot.messaging.reply(peer, mids, text)
+# text may by None. mids is list of UUIDs or AsyncTasks
 ```
 
 #### ** Java **
@@ -177,6 +260,13 @@ For sending files:
 
 ```python
 bot.messaging.send_file(peer, path_to_file)
+```
+
+#### ** Python (SDK version 3.0.0 +) **
+
+```python
+bot.messaging.send_file(peer, path_to_file)
+# peer must be Peer or AsyncTask object (if used AsyncTask it must contain Group or User. For example, from method **get_user_by_nick** )
 ```
 
 #### ** Java **
@@ -263,7 +353,7 @@ def on_msg(*params):
                     interactive_media.InteractiveMediaButton("Test", "button_one")
                 ),
                 interactive_media.InteractiveMedia(
-                    1,
+                    2,
                     interactive_media.InteractiveMediaButton("Test", "button_two")
                 ),
             ]
@@ -292,6 +382,57 @@ def on_click(*params):
     uid = params[0].uid
     which_button = params[0].value
     print(uid, 'clicked on', which_button)
+```
+
+#### ** Python (SDK version 3.0.0 +) **
+
+For Python SDK, it's needed to add extra callback for handling actions:
+
+```python
+from dialog_bot_sdk import interactive_media
+
+
+def on_msg(params):
+    print('on msg', params)
+    bot.messaging.send_message(
+        params.peer,
+        "buttons",
+        [interactive_media.InteractiveMediaGroup(
+            [
+                interactive_media.InteractiveMedia(
+                    1,
+                    interactive_media.InteractiveMediaButton("Test", "button_one")
+                ),
+                interactive_media.InteractiveMedia(
+                    2,
+                    interactive_media.InteractiveMediaButton("Test", "button_two")
+                ),
+            ]
+        )]
+    )
+
+def on_click(params):
+    print('on click', params)
+
+
+bot.messaging.on_message(on_msg, on_click)
+
+```
+
+``on_click`` is a callback that accepts the ``params`` tuple with interactive media updates. Fields of ``params`` object are:
+
+* **peer** - peer of user who performed interaction
+* **value** - element value
+* **id** - element local id (within message)
+* **mid** - message id where interaction was performed
+
+For example:
+
+```python
+def on_click(*params):
+    peer = params.peer
+    which_button = params.value
+    print(peer, 'clicked on', which_button)
 ```
 
 #### ** Java **
@@ -352,6 +493,27 @@ button = interactive_media.InteractiveMediaButton("Button", "button")
 
 bot.messaging.send_message(
     params[0].peer,
+    'button',
+    [
+        InteractiveMediaGroup(
+            [
+                InteractiveMedia(1, button, 'default', confirm)
+            ]
+        )
+    ]
+
+)
+```
+
+#### ** Python (SDK version 3.0.0 +) **
+
+```python
+confirm = InteractiveMediaConfirm("Are you sure?", "Confirm", "ok", "dismiss")
+
+button = interactive_media.InteractiveMediaButton("Button", "button")
+
+bot.messaging.send_message(
+    params.peer,
     'button',
     [
         InteractiveMediaGroup(
@@ -483,6 +645,35 @@ def on_msg(*params):
 * **description** - webpage's description;
 * **image_location** - ImageLocation object (can be obtained from get_media.get_image_location(bot, file, width, height));
 
+#### ** Python (SDK version 3.0.0 +) **
+
+
+```python
+def on_msg(*params):
+    image_location = ImageLocation(bot.internal.uploading.upload_file("./files/example.png"), 200, 50, 1337)
+    medias = [MessageMedia(image=ImageMedia(image_location))] # send_media worked only with array of medias
+    bot.messaging.send_media(params.peer, medias) # send message with media content for current peer
+
+```
+
+class MessageMedia may include:
+* **web_page** - WebPageMedia(url: str, title: str, description: str, image: ImageLocation)
+
+ImageLocation parameters:
+- file_location: FileLocation
+- height: int
+- width: int
+- file_size: int
+
+* **image** ImageMedia(image: ImageLocation)
+* **audio** (AudioMedia(audio: AudioLocation))
+
+ImageLocation parameters:
+- file_location: FileLocation
+- duration: int
+- mime_type: str
+- file_size: int
+
 #### ** Java **
 
 
@@ -550,6 +741,23 @@ This function has several params:
 * **limit** - number of messages
 * **date** - from which date we load history (in unix timestamp format)
 * **direction** - direction of history (can be ``messaging_pb2.LISTLOADMODE_FORWARD`` or ``messaging_pb2.LISTLOADMODE_BACKWARD``)
+
+#### ** Python (SDK version 3.0.0 +) **
+
+
+```python
+def on_msg(params):
+    history = bot.messaging.load_message_history(params.peer)
+    print(history)
+```
+
+This function has several params:
+
+* **peer** - Peer or AsyncTask (must contain Group or User) of user which history of messages we want to load
+* **limit** - count of messages
+* **date** - from which date we load history (in unix timestamp format)
+* **direction** - direction of history (can be ``ListLoadMode.LISTLOADMODE_FORWARD`` or ``ListLoadMode.LISTLOADMODE_BACKWARD``)
+# from dialog_bot_sdk.entities.ListLoadMode import ListLoadMode
 
 #### ** Java **
 
