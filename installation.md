@@ -20,7 +20,7 @@ And that's it!
 
 !>If you need to install SDK into restricted domain network where your SSL certificates might be changed by corporate firewall,
     you should follow these steps:<br>
-   $ git clone https://github.com/dialogs/python-bot-sdk.git<br>
+   $ git clone https://github.com/salute-to-business-public/dialog-python-bot-sdk.git<br>
    $ pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
 
 
@@ -67,7 +67,7 @@ dependencies {
 Firstly, you should download package from GitHub:
 
 ```bash
-$ git clone https://github.com/dialogs/js-bot-sdk.git
+$ git clone https://github.com/salute-to-business-public/dialog-js-bot-sdk
 ```
 
 Second step is installing dependencies (run this command from `js-bot-sdk` folder):
