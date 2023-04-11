@@ -2,11 +2,16 @@
 
 ![](background0.png)
 
-`Dialog` is a handy and feature-rich enterprise cross-platform messenger available on premise or cloud – Slack-like, but not Slack-limited.
+`Регистрация бота`
+Прежде чем начинать разработку, бота необходимо зарегистрировать и получить его уникальный id и токен. Для этого в Диалоге + существует специальный бот — @security_bot.
+Пишем ему /start и получаем пример команды для получения токена. 
 
-Whatever the version you use - cloud or enterprise, you can create your own bots via SDK library. We have libraries for:
+/bot new <nickname> <name> — бот просит придумать имя нашему новому боту. Единственное ограничение на nickname и name — оно должно содержать 5-32 символов. В случае успеха Security bot возвращает токен бота и бот id.
+
+`Разработка`
+Для разработки бота для Dialog Enterprise существуют следующие средства разработки: 
 - Python 3.5+;
 - Java;
 - Golang;
 
-At the beginning you should [install](installation.md) required library.
+Для начала нужно установить библиотеку [install](installation.md).
