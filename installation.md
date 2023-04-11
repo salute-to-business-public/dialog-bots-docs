@@ -61,23 +61,3 @@ dependencies {
 }
 ```
 
-
-## JavaScript
-
-Firstly, you should download package from GitHub:
-
-```bash
-$ git clone https://github.com/salute-to-business-public/dialog-js-bot-sdk
-```
-
-Second step is installing dependencies (run this command from `js-bot-sdk` folder):
-
-```bash
-$ npm i install
-```
-
-To launch examples run this:
-
-```bash
-$ ts-node ./examples/index.ts
-```
